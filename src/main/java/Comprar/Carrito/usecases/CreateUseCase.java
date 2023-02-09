@@ -1,5 +1,6 @@
 package Comprar.Carrito.usecases;
 
+import Comprar.Carrito.collections.Invoice;
 import Comprar.Carrito.model.InvoiceDTO;
 import Comprar.Carrito.model.ProductsDTO;
 import Comprar.Carrito.repositories.InvoiceRepository;
@@ -27,6 +28,6 @@ public class CreateUseCase implements SaveInvoice {
 
     @Override
     public Mono<String> apply(InvoiceDTO invoiceDTO) {
-        return null;
+        return invoiceRepository.save(mapperUtils.mapperToInvoice(null).apply(invoiceDTO)).map(Invoice::getId);
     }
 }

@@ -3,24 +3,28 @@ package Comprar.Carrito.model;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import javax.validation.constraints.NotBlank;
 public class InvoiceDTO {
 
     @Id
     private String id;
     private String Idtype;
-    private LocalDateTime Date;
+    private LocalTime Date;
     private String clientId;
     @NotBlank
     private String ClientName;
-    private List products;
+    private List<ProductsDTO> products;
 
     public InvoiceDTO() {
     }
 
-    public InvoiceDTO(String id, String idtype, LocalDateTime date, @NotBlank String clientId, String clientName, List products) {
+    public InvoiceDTO(String id, String idtype, LocalTime date, @NotBlank String clientId, String clientName, List products) {
         this.id = id;
         Idtype = idtype;
         Date = date;
@@ -28,7 +32,7 @@ public class InvoiceDTO {
         ClientName = clientName;
         this.products = products;
     }
-    public InvoiceDTO(String idtype, LocalDateTime date, String clientId, @NotBlank String clientName, List products) {
+    public InvoiceDTO(String idtype, LocalTime date, String clientId, @NotBlank String clientName, List products) {
         this.id = id;
         Idtype = idtype;
         Date = date;
@@ -53,12 +57,13 @@ public class InvoiceDTO {
         Idtype = idtype;
     }
 
-    public LocalDateTime getDate() {
+    public LocalTime getDate() {
         return Date;
     }
 
-    public void setDate(LocalDateTime date) {
-        Date = date;
+    public void setDate(LocalTime date) {
+
+        Date = LocalTime.now().plusHours(-5);
     }
 
     public String getClientId() {
@@ -77,11 +82,13 @@ public class InvoiceDTO {
         ClientName = clientName;
     }
 
-    public List getProducts() {
+    public List<ProductsDTO> getProducts() {
+
+        this.products = Optional.ofNullable(products).orElse(new ArrayList<>());
         return products;
     }
 
-    public void setProducts(List products) {
+    public void setProducts(List<ProductsDTO> products) {
         this.products = products;
     }
 

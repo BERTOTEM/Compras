@@ -1,9 +1,11 @@
 package Comprar.Carrito.collections;
 
+import Comprar.Carrito.model.ProductsDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Document(collection = "Factura")
@@ -11,10 +13,10 @@ public class Invoice {
     @Id
     private String id;
     private String Idtype;
-    private LocalDateTime Date;
+    private LocalTime Date;
     private String clientId;
     private String ClientName;
-    private List products;
+    private List<ProductsDTO> products;
 
     public String getId() {
         return id;
@@ -32,11 +34,11 @@ public class Invoice {
         Idtype = idtype;
     }
 
-    public LocalDateTime getDate() {
+    public LocalTime getDate() {
         return Date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalTime date) {
         Date = date;
     }
 
