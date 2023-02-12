@@ -16,7 +16,7 @@ public class Invoice {
     private LocalTime Date;
     private String clientId;
     private String ClientName;
-    private List<ProductsDTO> products;
+    private List products;
 
     public String getId() {
         return id;

@@ -20,11 +20,4 @@ public class UpdateProductUseCase {
                 .bodyToMono(ProductsDTO.class);
     }
 
-    public Mono<ProductsDTO> UpdateProductotal(ProductsDTO productsDTO) {
-        return webClient.put()
-                .uri("/update")
-                .body(Mono.just(productsDTO), ProductsDTO.class)
-                .retrieve()
-                .bodyToMono(ProductsDTO.class);
-    }
 }

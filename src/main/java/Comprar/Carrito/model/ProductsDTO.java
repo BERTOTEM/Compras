@@ -22,7 +22,7 @@ public class ProductsDTO {
 
     private boolean state;
 
-    private long price;
+    private Long price;
 
     public String getId() {
         return id;
@@ -88,11 +88,11 @@ public class ProductsDTO {
         this.state = state;
     }
 
-    public long getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 

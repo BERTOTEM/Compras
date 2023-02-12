@@ -17,14 +17,14 @@ public class InvoiceDTO {
     private String Idtype;
     private LocalTime Date;
     private String clientId;
-    @NotBlank
+
     private String ClientName;
-    private List<ProductsDTO> products;
+    private List products;
 
     public InvoiceDTO() {
     }
 
-    public InvoiceDTO(String id, String idtype, LocalTime date, @NotBlank String clientId, String clientName, List products) {
+    public InvoiceDTO(String id, String idtype, LocalTime date,  String clientId,  String clientName, List products) {
         this.id = id;
         Idtype = idtype;
         Date = date;
@@ -32,7 +32,7 @@ public class InvoiceDTO {
         ClientName = clientName;
         this.products = products;
     }
-    public InvoiceDTO(String idtype, LocalTime date, String clientId, @NotBlank String clientName, List products) {
+    public InvoiceDTO(String idtype, LocalTime date, String clientId,  String clientName, List products) {
         this.id = id;
         Idtype = idtype;
         Date = date;
@@ -82,13 +82,13 @@ public class InvoiceDTO {
         ClientName = clientName;
     }
 
-    public List<ProductsDTO> getProducts() {
+    public List getProducts() {
 
         this.products = Optional.ofNullable(products).orElse(new ArrayList<>());
         return products;
     }
 
-    public void setProducts(List<ProductsDTO> products) {
+    public void setProducts(List products) {
         this.products = products;
     }
 

@@ -8,7 +8,6 @@ import java.util.function.Function;
 
 @Component
 public class MapperUtils {
-
     public Function<InvoiceDTO, Invoice> mapperToInvoice(String id) {
         return updateInvoice -> {
             var invoice = new Invoice();
