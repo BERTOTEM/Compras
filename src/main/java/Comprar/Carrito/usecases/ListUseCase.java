@@ -35,4 +35,11 @@ public class ListUseCase implements Supplier<Flux<InvoiceDTO>> {
                 .retrieve()
                 .bodyToMono(ProductsDTO[].class);
     }
+
+    public Mono<Integer> getTotalPages() {
+        Mono<Integer> result = invoiceRepository.count().map(count -> (int) Math.ceil(count / 5) + 1);
+        return result;
+
+    }
+
 }
