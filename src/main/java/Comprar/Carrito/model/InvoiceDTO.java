@@ -10,14 +10,19 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+
 public class InvoiceDTO {
 
     @Id
     private String id;
+    @NotBlank
     private String Idtype;
+    @PastOrPresent
     private LocalTime Date;
+    @NotBlank
     private String clientId;
-
+    @NotBlank
     private String ClientName;
     private List products;
 
