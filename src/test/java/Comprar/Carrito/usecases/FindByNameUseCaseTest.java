@@ -26,12 +26,9 @@ class FindByNameUseCaseTest {
     @Test
     public void FindByNameUseCaseTest() {
 
-        String expectedResult =
-                "[{\"id\":\"63e5bab30667696723fabe55\",\"name\":\"gta\",\"inInventory\":439," +
-                        "\"enabled\":true,\"min\":8,\"max\":200,\"img\":\"https://i.blogs.es/9c8d76/gta-v/840_560.jpeg\"," +
-                        "\"state\":true,\"price\":60000}]"; //lo que se espera
+        String expectedResult = "[{\"id\":\"63e4406ed8eca96db657b831\",\"name\":\"Mando Xbox\",\"inInventory\":200,\"enabled\":true,\"min\":8,\"max\":200,\"img\":\"https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Xbox_360_special_edition_transforming_dpad_controller.jpg/1280px-Xbox_360_special_edition_transforming_dpad_controller.jpg\",\"state\":true,\"price\":135000}]"; //lo que se espera
 
-        String url = "http://localhost:8080/getName/gta";
+        String url = "http://localhost:8080/getName/Mando Xbox";
 
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
