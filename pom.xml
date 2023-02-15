@@ -52,6 +52,14 @@
 			<artifactId>springdoc-openapi-webflux-ui</artifactId>
 			<version>1.6.12</version>
 		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
