@@ -26,7 +26,7 @@ public class UserRouter {
                         .bodyValue(result));
 
         return route(
-                POST("/createUser").and(accept(MediaType.APPLICATION_JSON)),
+                POST("/public/createUser").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(UserDTO.class).flatMap(executor)
         );
 

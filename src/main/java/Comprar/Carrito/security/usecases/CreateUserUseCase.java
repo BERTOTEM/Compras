@@ -1,6 +1,5 @@
 package Comprar.Carrito.security.usecases;
 
-import Comprar.Carrito.collections.Invoice;
 import Comprar.Carrito.security.collection.User;
 import Comprar.Carrito.security.model.UserDTO;
 import Comprar.Carrito.security.repository.UserRepository;
@@ -17,7 +16,7 @@ public class CreateUserUseCase implements SaveUser{
     private final MapperUtilsUser mapperUtilsUser;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+   PasswordEncoder passwordEncoder;
     public CreateUserUseCase(UserRepository userRepository, MapperUtilsUser mapperUtilsUser) {
         this.userRepository = userRepository;
 
