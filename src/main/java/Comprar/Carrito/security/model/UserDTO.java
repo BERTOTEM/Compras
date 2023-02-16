@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
+import java.util.Set;
 
 public class UserDTO {
     @Id
@@ -18,12 +19,12 @@ public class UserDTO {
     @NotBlank(message = "password es obligatorio")
     private String password;
     @NotEmpty(message = "El rol no puede estar vacio")
-    private List<RoleEnum > roles;
+    private List<String> roles;
 
     public UserDTO() {
     }
 
-    public UserDTO(String id, String username, String email, String password, List<RoleEnum> roles) {
+    public UserDTO(String id, String username, String email, String password, List<String> roles) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -63,11 +64,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public List<RoleEnum> getRoles() {
+    public List<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleEnum> roles) {
+    public void setRoles(List<String> roles) {
         this.roles = roles;
     }
 }

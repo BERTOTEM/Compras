@@ -28,6 +28,7 @@ public class MapperUtilsUser {
                 entity.getEmail(),
                 entity.getPassword(),
                 entity.getRoles()
+
         );
     }
 }

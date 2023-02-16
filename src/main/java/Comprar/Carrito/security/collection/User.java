@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Set;
 
 @Document(collection = "users")
 public class User {
@@ -14,7 +15,7 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private List<RoleEnum> roles;
+    private List<String> roles;
 
     public String getId() {
         return id;
@@ -48,11 +49,11 @@ public class User {
         this.password = password;
     }
 
-    public List<RoleEnum> getRoles() {
+    public List<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleEnum> roles) {
+    public void setRoles(List<String> roles) {
         this.roles = roles;
     }
 }
