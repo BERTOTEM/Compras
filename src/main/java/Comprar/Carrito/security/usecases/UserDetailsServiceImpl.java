@@ -7,6 +7,7 @@ package Comprar.Carrito.security.usecases;
  import org.springframework.security.core.userdetails.User;
  import org.springframework.security.core.userdetails.UserDetails;
 
+ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  import org.springframework.stereotype.Service;
  import reactor.core.publisher.Mono;
 
@@ -29,6 +30,7 @@ package Comprar.Carrito.security.usecases;
                                  .map(role ->
                                  new SimpleGrantedAuthority(role))
                                  .collect(Collectors.toList())));
+
      }
  }
 

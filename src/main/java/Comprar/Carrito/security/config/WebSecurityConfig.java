@@ -24,8 +24,17 @@ public class WebSecurityConfig {
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
                 .authorizeExchange()
-                .pathMatchers("/getAllInvoice").permitAll()
-                .pathMatchers("/private/**").authenticated()
+                .pathMatchers("/createUser").permitAll()
+                .pathMatchers("/webjars/swagger-ui/index.html#/").permitAll()
+                .pathMatchers("/getAllInvoice").hasAnyRole("ADMIN","USER")
+                .pathMatchers("/getName/{name}").hasAnyRole("ADMIN","USER")
+                .pathMatchers("/get/{id}").hasAnyRole("ADMIN","USER")
+                .pathMatchers("/update/{id}/{quantity}").hasAnyRole("ADMIN","USER")
+                .pathMatchers("/pagination/{pageNumber}").hasAnyRole("ADMIN","USER")
+                .pathMatchers("/create").hasAnyRole("ADMIN","USER")
+                .pathMatchers("/totalPages").hasAnyRole("ADMIN","USER")
+
+
                 .and()
                 .httpBasic()
                 .and()
@@ -40,9 +49,9 @@ public class WebSecurityConfig {
     @Bean
     public ReactiveAuthenticationManager authenticationManager() {
         UserDetailsRepositoryReactiveAuthenticationManager manager
-                =
-                new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService);
+                = new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService);
         manager.setPasswordEncoder(passwordEncoder());
+        System.out.println(manager);
         return manager;
     }
 
