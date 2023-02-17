@@ -25,7 +25,10 @@ public class WebSecurityConfig {
         return http
                 .authorizeExchange()
                 .pathMatchers("/createUser").permitAll()
+                .pathMatchers("/changeState/{id}").hasRole("ADMIN")
                 .pathMatchers("/webjars/swagger-ui/index.html#/").permitAll()
+                .pathMatchers("/updateProductAll").hasRole("ADMIN")
+                .pathMatchers("/createProduct").hasRole("ADMIN")
                 .pathMatchers("/getAllInvoice").hasAnyRole("ADMIN","USER")
                 .pathMatchers("/getName/{name}").hasAnyRole("ADMIN","USER")
                 .pathMatchers("/get/{id}").hasAnyRole("ADMIN","USER")
@@ -33,6 +36,7 @@ public class WebSecurityConfig {
                 .pathMatchers("/pagination/{pageNumber}").hasAnyRole("ADMIN","USER")
                 .pathMatchers("/create").hasAnyRole("ADMIN","USER")
                 .pathMatchers("/totalPages").hasAnyRole("ADMIN","USER")
+
 
 
                 .and()
