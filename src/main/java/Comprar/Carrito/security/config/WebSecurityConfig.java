@@ -9,6 +9,10 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.authentication.RedirectServerAuthenticationSuccessHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebFluxSecurity
@@ -16,17 +20,19 @@ public class WebSecurityConfig {
 
     private final UserDetailsServiceImpl userDetailsService;
 
+
     public WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-        return http
+        return http.cors().and()
                 .authorizeExchange()
                 .pathMatchers("/createUser").permitAll()
-                .pathMatchers("/changeState/{id}").hasRole("ADMIN")
+                .pathMatchers("/login").permitAll()
                 .pathMatchers("/webjars/swagger-ui/index.html#/").permitAll()
+                .pathMatchers("/changeState/{id}").hasRole("ADMIN")
                 .pathMatchers("/updateProductAll").hasRole("ADMIN")
                 .pathMatchers("/createProduct").hasRole("ADMIN")
                 .pathMatchers("/getAllInvoice").hasAnyRole("ADMIN","USER")
@@ -36,9 +42,6 @@ public class WebSecurityConfig {
                 .pathMatchers("/pagination/{pageNumber}").hasAnyRole("ADMIN","USER")
                 .pathMatchers("/create").hasAnyRole("ADMIN","USER")
                 .pathMatchers("/totalPages").hasAnyRole("ADMIN","USER")
-
-
-
                 .and()
                 .httpBasic()
                 .and()
@@ -49,8 +52,18 @@ public class WebSecurityConfig {
                 .authenticationManager(authenticationManager())
                 .build();
     }
-
     @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("http://localhost:4200"); // permitir solicitudes CORS desde cualquier origen
+        configuration.addAllowedMethod("*"); // permitir todos los métodos HTTP
+        configuration.addAllowedHeader("*"); // permitir todos los encabezados
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;}
+
+
+        @Bean
     public ReactiveAuthenticationManager authenticationManager() {
         UserDetailsRepositoryReactiveAuthenticationManager manager
                 = new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService);
@@ -59,7 +72,10 @@ public class WebSecurityConfig {
         return manager;
     }
 
-    
+
+
+
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
