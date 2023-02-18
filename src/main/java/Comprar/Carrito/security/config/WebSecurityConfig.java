@@ -1,15 +1,19 @@
 package Comprar.Carrito.security.config;
+import Comprar.Carrito.security.usecases.JWTAuthenticationConverter;
+import Comprar.Carrito.security.usecases.JWTUtil;
+import Comprar.Carrito.security.usecases.JwtAuthenticationFilter;
 import Comprar.Carrito.security.usecases.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
-import org.springframework.security.web.server.authentication.RedirectServerAuthenticationSuccessHandler;
+import org.springframework.security.web.server.authentication.ServerAuthenticationConverter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
@@ -19,10 +23,11 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 public class WebSecurityConfig {
 
     private final UserDetailsServiceImpl userDetailsService;
+    private final JWTUtil jwtUtil;
 
-
-    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, JWTUtil jwtUtil) {
         this.userDetailsService = userDetailsService;
+        this.jwtUtil = jwtUtil;
     }
 
     @Bean
@@ -50,6 +55,7 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 .logout().disable()
                 .authenticationManager(authenticationManager())
+                .addFilterAt(jwtAuthenticationFilter(), SecurityWebFiltersOrder.HTTP_BASIC)
                 .build();
     }
     @Bean
@@ -72,7 +78,15 @@ public class WebSecurityConfig {
         return manager;
     }
 
+   //@Bean
+   //public ServerAuthenticationConverter serverAuthenticationConverter() {
+   //    return new JWTAuthenticationConverter(jwtUtil);
+   //}
+   //
 
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter(authenticationManager(), new JWTAuthenticationConverter(jwtUtil));
+    }
 
 
 
