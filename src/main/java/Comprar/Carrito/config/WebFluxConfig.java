@@ -17,17 +17,7 @@ import reactor.netty.http.client.HttpClient;
 
 @Configuration
 public class WebFluxConfig {
-    @Bean
-    public WebFluxConfigurer corsConfigure() {
-        return new WebFluxConfigurerComposite() {
 
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*")
-                        .allowedMethods("*");
-            }
-        };
-    }
     @Bean
     public WebClient getWebClient()
     {

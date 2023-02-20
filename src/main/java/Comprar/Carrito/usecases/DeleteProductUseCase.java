@@ -8,18 +8,16 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 @Service
 @Validated
-public class FindByNameUseCase {
+public class DeleteProductUseCase {
+
+
     @Autowired
     WebClient webClient;
 
-    public Mono<ProductsDTO[]> findByName(String name) {
-        return webClient.get()
-                .uri("/getName/{name}",name)
+    public Mono<ProductsDTO> DeleteProduct(String id) {
+        return webClient.patch()
+                .uri("/changeState/{id}",id)
                 .retrieve()
-                .bodyToMono(ProductsDTO[].class);
+                .bodyToMono(ProductsDTO.class);
     }
-
-
-
-
 }
