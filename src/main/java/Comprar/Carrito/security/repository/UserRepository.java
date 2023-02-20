@@ -10,8 +10,11 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository  extends ReactiveCrudRepository<User,String> {
+    @Override
+    Mono<User> findById(String s);
 
-    Mono<Boolean> existsByEmail(String email);
-    Mono<User> findByEmail(String email);
+
+    Mono<Boolean> existsByUsername(String userName);
+    Mono<User> findByUsername(String userName);
 
 }

@@ -3,32 +3,29 @@ package Comprar.Carrito.security.usecases;
 
 
 import Comprar.Carrito.security.collection.User;
-import Comprar.Carrito.security.model.UserDTO;
+import Comprar.Carrito.security.dto.UserDto;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
 @Component
 public class MapperUtilsUser {
-
-    public Function<UserDTO, User> mapperToUser(String id) {
+    public Function<UserDto, User> mapperToUser(String id) {
         return updateUser -> {
-            var user = new User();
-            user.setId(id);
-            user.setUsername(updateUser.getUsername());
-            user.setEmail(updateUser.getEmail());
-            user.setPassword(updateUser.getPassword());
-            user.setRoles(updateUser.getRoles());
-            return user;
+            var userDTO = new User();
+            userDTO.setUsername(updateUser.getUsername());
+            userDTO.setId(updateUser.getId());
+            userDTO.setPassword(updateUser.getPassword());
+            userDTO.setRoles(updateUser.getRoles());
+            return userDTO;
         };
     }
-    public Function<User, UserDTO> mapEntityToUser() {
-        return entity -> new UserDTO(
+
+    public Function<User, UserDto> mapEntityToUser() {
+        return entity -> new UserDto(
                 entity.getId(),
                 entity.getUsername(),
-                entity.getEmail(),
                 entity.getPassword(),
                 entity.getRoles()
-
         );
     }
 }

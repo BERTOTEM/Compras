@@ -1,29 +1,40 @@
 package Comprar.Carrito.security.collection;
 
-import Comprar.Carrito.security.enums.RoleEnum;
+import Comprar.Carrito.security.enums.RolesEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Document(collection = "users")
-public class User {
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Document(collection = "User")
+public class User implements UserDetails {
 
     @Id
+    @Getter
+    @Setter
     private String id;
     private String username;
-    private String email;
+
     private String password;
-    private List<String> roles;
 
-    public String getId() {
-        return id;
-    }
+    @Getter @Setter
+    private Boolean enabled;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    @Getter @Setter
+    private List<RolesEnum> roles;
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -32,27 +43,39 @@ public class User {
         this.username = username;
     }
 
-    public String getEmail() {
-        return email;
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
     }
 
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles.stream().map(authority -> new SimpleGrantedAuthority(authority.name())).collect(Collectors.toList());
+    }
+
+    @JsonIgnore
+    @Override
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -31,6 +32,7 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 @Configuration
 public class InvoiceRouter {
     @Bean
+    @CrossOrigin(origins = "*")
     @RouterOperation(path = "/getAllInvoice",
             produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET,
             beanClass = InvoiceRouter.class,
