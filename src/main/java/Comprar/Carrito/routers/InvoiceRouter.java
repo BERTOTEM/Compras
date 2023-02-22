@@ -253,4 +253,25 @@ public class InvoiceRouter {
                         .body(BodyInserters.fromPublisher(deleteProductUseCase.DeleteProduct(request.pathVariable("id")),ProductsDTO.class))
         );
     }
+    @Bean
+    public RouterFunction<ServerResponse>getAllProducts(ListUseCase listUseCase){
+        return route(GET("/getAllProducts"),
+                request -> ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(listUseCase.getAllProduct(), ProductsDTO.class)));
+
+    }
+    @Bean
+    public  RouterFunction<ServerResponse>getAccountAll(ListAccountUseCase listAccountUseCase ){
+        return route(GET("/getAccount/{name}"),
+                request -> ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(listAccountUseCase
+                                .getAccount(request.pathVariable("name")), InvoiceDTO.class))
+
+
+        );
+
+
+    }
 }

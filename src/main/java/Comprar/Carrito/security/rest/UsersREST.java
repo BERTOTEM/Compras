@@ -23,9 +23,9 @@ public class UsersREST {
         return userRepository.existsByUsername(userDTO.getUsername())
                 .flatMap(username -> {
                     if(username){
-                        return Mono.error(new Exception("Ya existe este usuario"));
+                        return Mono.error(new IllegalStateException ("Ya existe este usuario"));
                     }else{
-                        System.out.println(userDTO);
+
                         userDTO.setPassword(pbkdf2Encoder.encode(userDTO.getPassword()));
                         return userRepository.save(mapperUtils
                                         .mapperToUser(null).apply(userDTO))

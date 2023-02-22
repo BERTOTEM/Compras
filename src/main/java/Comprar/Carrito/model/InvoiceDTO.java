@@ -5,10 +5,7 @@ import org.springframework.data.annotation.Id;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 
@@ -19,25 +16,29 @@ public class InvoiceDTO {
     @NotBlank
     private String Idtype;
     @PastOrPresent
-    private LocalTime Date;
+    private Date Date;
     @NotBlank
     private String clientId;
     @NotBlank
     private String ClientName;
+    @NotBlank
+    private  String account;
     private List products;
 
     public InvoiceDTO() {
     }
 
-    public InvoiceDTO(String id, String idtype, LocalTime date,  String clientId,  String clientName, List products) {
+    public InvoiceDTO(String id, String idtype, Date date, String clientId, String clientName, String account, List products) {
         this.id = id;
         Idtype = idtype;
         Date = date;
         this.clientId = clientId;
         ClientName = clientName;
+        this.account = account;
         this.products = products;
     }
-    public InvoiceDTO(String idtype, LocalTime date, String clientId,  String clientName, List products) {
+
+    public InvoiceDTO(String idtype, Date date, String clientId, String clientName, List products) {
         this.id = id;
         Idtype = idtype;
         Date = date;
@@ -62,13 +63,18 @@ public class InvoiceDTO {
         Idtype = idtype;
     }
 
-    public LocalTime getDate() {
+    public Date getDate() {
         return Date;
     }
 
-    public void setDate(LocalTime date) {
+   //public void setDate(LocalTime date) {
+   //
+   //    Date = LocalTime.now().plusHours(-5);
+   //}
 
-        Date = LocalTime.now().plusHours(-5);
+
+    public void setDate(Date date) {
+        Date = date;
     }
 
     public String getClientId() {
@@ -95,6 +101,15 @@ public class InvoiceDTO {
 
     public void setProducts(List products) {
         this.products = products;
+    }
+
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     @Override

@@ -16,6 +16,7 @@ public class MapperUtils {
             invoice.setDate(updateInvoice.getDate());
             invoice.setClientId(updateInvoice.getClientId());
             invoice.setClientName(updateInvoice.getClientName());
+            invoice.setAccount(updateInvoice.getAccount());
             invoice.setProducts(updateInvoice.getProducts());
 
             return invoice;
@@ -28,6 +29,7 @@ public class MapperUtils {
                 entity.getDate(),
                 entity.getClientId(),
                 entity.getClientName(),
+                entity.getAccount(),
                 entity.getProducts()
         );
     }

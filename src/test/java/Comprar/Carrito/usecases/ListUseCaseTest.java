@@ -36,7 +36,7 @@ class ListUseCaseTest {
         List productDTO = new ArrayList<>();
         LocalTime fecha = LocalTime.now();
         Invoice invoice= new Invoice();
-        InvoiceDTO invoiceDTO= new InvoiceDTO("jk500","CC",fecha,"1017261707","julian",productDTO);
+        InvoiceDTO invoiceDTO= new InvoiceDTO("jk500","CC",fecha,"1017261707","julian","jrtma34@gamil.com",productDTO);
         invoice.setId(invoiceDTO.getId());
         invoice.setIdtype(invoiceDTO.getIdtype());
         invoice.setDate(invoiceDTO.getDate());

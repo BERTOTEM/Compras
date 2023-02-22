@@ -4,8 +4,10 @@ import Comprar.Carrito.model.ProductsDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 @Document(collection = "Factura")
@@ -13,9 +15,11 @@ public class Invoice {
     @Id
     private String id;
     private String Idtype;
-    private LocalTime Date;
+    private Date Date;
     private String clientId;
     private String ClientName;
+
+    private  String account;
     private List products;
 
     public String getId() {
@@ -34,11 +38,11 @@ public class Invoice {
         Idtype = idtype;
     }
 
-    public LocalTime getDate() {
+    public Date getDate() {
         return Date;
     }
 
-    public void setDate(LocalTime date) {
+    public void setDate(Date date) {
         Date = date;
     }
 
@@ -64,5 +68,13 @@ public class Invoice {
 
     public void setProducts(List products) {
         this.products = products;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 }

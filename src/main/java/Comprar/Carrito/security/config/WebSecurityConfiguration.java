@@ -15,7 +15,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.CorsWebFilter;
+
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import reactor.core.publisher.Mono;
 
@@ -47,13 +47,19 @@ public class WebSecurityConfiguration {
                 .pathMatchers(HttpMethod.OPTIONS).permitAll()
                 .pathMatchers("/login").permitAll()
                 .pathMatchers("/createUser").permitAll()
-                .pathMatchers("/getAllInvoice").permitAll()
+                .pathMatchers("/getAllInvoice").hasAnyRole("ADMIN","USER")
                 .pathMatchers("/totalPages").hasAnyRole("ADMIN","USER")
-                .pathMatchers("/pagination/{pageNumber}").hasAnyRole("ADMIN")
+                .pathMatchers("/pagination/{pageNumber}").hasAnyRole("ADMIN","USER")
                 .pathMatchers("/getName/{name}").hasAnyRole("ADMIN","USER")
                 .pathMatchers("/get/{id}").hasAnyRole("ADMIN","USER")
                 .pathMatchers("/update/{id}/{quantity}").hasAnyRole("ADMIN","USER")
                 .pathMatchers("/create").hasAnyRole("ADMIN","USER")
+                .pathMatchers("/getAccount/{name}").hasAnyRole("ADMIN","USER")
+                .pathMatchers("/createProduct").hasRole("ADMIN")
+                .pathMatchers("/updateProductAll").hasRole("ADMIN")
+                .pathMatchers("/changeState/{id}").hasRole("ADMIN")
+                .pathMatchers("/getAllProducts").hasRole("ADMIN")
+
 
 
                 .anyExchange().authenticated()

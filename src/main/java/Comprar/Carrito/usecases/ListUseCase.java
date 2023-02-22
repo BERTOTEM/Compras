@@ -43,6 +43,14 @@ public class ListUseCase implements Supplier<Flux<InvoiceDTO>> {
                 .bodyToMono(Integer.class);
 
     }
+    public Flux<ProductsDTO> getAllProduct() {
+        return webClient.get()
+                .uri("/getAllProducts")
+                .retrieve()
+                .bodyToFlux(ProductsDTO.class);
+    }
+
+
 
 
 
