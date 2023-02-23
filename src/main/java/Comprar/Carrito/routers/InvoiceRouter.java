@@ -274,4 +274,12 @@ public class InvoiceRouter {
 
 
     }
+    @Bean
+    public RouterFunction<ServerResponse> countProducts(GetProductsUseCase getProductsUseCase ) {
+        return route(GET("/countProducts"),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(getProductsUseCase.GetTotalProducts(), Long.class))
+        );
+    }
 }
