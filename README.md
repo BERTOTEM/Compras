@@ -15,6 +15,9 @@ Funcionalidades :
 ###### ●	Uso de Swagger 
 ###### ●	Historial de compra
 ###### ●	Carrito de compra
+###### ●	implementacion de JWt,security con reactividad
+###### ●	implementacion Rol de usuario 
+
 
 ### Herramientas
 ![image](https://user-images.githubusercontent.com/82735837/213869204-21ef4f38-69c6-41da-a115-92c54ff22f77.png)
@@ -32,4 +35,5 @@ Funcionalidades :
 
 ### Autor y Versión
 - Julian Roberto Mazo Arroyave
+-David Santiago Benjumea
 - 1.0.0
